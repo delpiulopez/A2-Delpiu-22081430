@@ -1,33 +1,111 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.contact {
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 5px;
-    border-color: black;
-    padding: 5px;
-    margin: 5px;
-    cursor: pointer;
-
+body {
+    background-color: #f9f9f9;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
 }
-.contact:hover {
-    background-color: #E0E0E0;
+
+.contact {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 10px auto;
+    cursor: pointer;
 }
-.contact > .title {
+
+.contact-summary {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.contact-summary h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.contact-summary p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.contact-summary .button {
+    display: block;
+    margin-top: 10px;
+    background-color: #f44336;
+    color: white;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    width: 120px; 
+}
+
+.contact-summary .button:hover {
+    background-color: #da190b;
+}
+
+.new-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+
+.new-contact > input {
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+.new-phone {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+}
+
+.new-phone > input {
+    margin-right: 5px;
     width: 100%;
 }
-.contact > .title > h3 {
-    margin: 0px;
+
+.contact-list {
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+    padding: 5px;
+
+    border-radius: 5px;
+    margin-bottom: 15px;
+
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.contact-list > h2 {
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
 }
 
 .button {
@@ -69,35 +147,6 @@
     color: gray;
 }
 
-.contact-list {
-    border-width: 2px;
-    border-style: solid;
-    border-color: black;
-    padding: 5px;
-
-    border-radius: 5px;
-    margin-bottom: 15px;
-    
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-}
-
-.contact-list > h2 {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-}
-
-.new-contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.new-contact > input {
-    margin-bottom: 8px;
-}
-
 .phone-list {
     display: flex;
     flex-direction: column;
@@ -130,17 +179,6 @@
     text-align: left;
 }
 
-.new-phone {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.new-phone > input {
-    margin-right: 5px;
-    width: 100%;
-}
-
 .stats > p {
     color: gray;
     cursor: pointer;
@@ -158,8 +196,8 @@
 
     border-radius: 5px;
     margin-bottom: 15px;
-    
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
     text-align: center;
 
     padding-left: 15px;

@@ -42,7 +42,7 @@ function NewPhone(props) {
             <option value="Fax">Fax</option>
             </select>
             <input type='text' placeholder='Phone Number' onChange={(e) => setNumber(e.target.value)} value={phone_number}/>
-            <button className='button green' type='submit'>Add Lopez's Phone</button>
+            <button className='button green' type='submit'>Add to Lopez's Phone</button>
         </form>
     );
 }
