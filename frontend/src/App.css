@@ -52,7 +52,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
-    width: 120px; 
+    width: 120px;
 }
 
 .contact-summary .button:hover {
@@ -67,7 +67,6 @@ body {
     margin-bottom: 20px;
 }
 
-
 .new-contact > input {
     margin-bottom: 10px;
     padding: 10px;
@@ -76,7 +75,6 @@ body {
     border-radius: 5px;
     font-size: 14px;
 }
-
 
 .new-phone {
     display: flex;
@@ -94,10 +92,8 @@ body {
     border-style: solid;
     border-color: black;
     padding: 5px;
-
     border-radius: 5px;
     margin-bottom: 15px;
-
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
@@ -123,12 +119,15 @@ body {
 .green {
     background-color: #4CAF50;
 }
+
 .green:hover {
     background-color: #46a049;
 }
+
 .red {
     background-color: #f44336;
 }
+
 .red:hover {
     background-color: #da190b;
 }
@@ -143,6 +142,7 @@ body {
     align-items: center;
     overflow-y: auto;
 }
+
 .page > p {
     color: gray;
 }
@@ -152,12 +152,15 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
 .phone-list > table {
     margin-top: 10px;
 }
+
 .phone-list > table > thead > tr > th {
     padding: 5px;
 }
+
 .phone-list > table > tbody > tr > td {
     padding: 5px;
 }
@@ -184,6 +187,7 @@ body {
     cursor: pointer;
     text-align: center;
 }
+
 .stats > p:hover {
     color: black;
 }
@@ -193,13 +197,66 @@ body {
     border-style: solid;
     border-color: black;
     padding: 5px;
-
     border-radius: 5px;
     margin-bottom: 15px;
-
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
     text-align: center;
-
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.company-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.company-list th, .company-list td {
+    border: 1px solid #b1b1b1;
+    padding: 8px;
+    text-align: left;
+}
+
+.company-list th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.new-company {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.new-company > input {
+    padding: 8px;
+    width: calc(50% - 10px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.new-company > button {
+    padding: 8px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.new-company > button:hover {
+    background-color: #46a049;
+}
+
+.expanded-section {
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.company-list, .phone-list {
+    margin-top: 20px;
 }
