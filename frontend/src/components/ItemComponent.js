@@ -94,7 +94,6 @@ function ItemComponent() {
             onClick={() => toggleExpanded(index)}
           >
             <div className="title">
-              <h3>Item Data</h3>
               <div className="item-info">
                 <p>
                   <strong>Item:</strong> {item.item_name}
@@ -103,22 +102,19 @@ function ItemComponent() {
                   <strong>Price:</strong> {item.item_price}
                 </p>
               </div>
-
-              <button
-                className="button red"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  doDelete(item.item_id);
-                }}
-              >
-                Delete Item
-              </button>
             </div>
 
             {item.expanded && (
               <div style={{ display: "block" }}>
-                <hr />
-                {/* Nothing to be inputted here */}
+                <button
+                  className="button red"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    doDelete(item.item_id);
+                  }}
+                >
+                  Delete Item
+                </button>
               </div>
             )}
           </div>

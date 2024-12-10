@@ -260,3 +260,92 @@ body {
 .company-list, .phone-list {
     margin-top: 20px;
 }
+
+/* Items */
+/* Container for the Component */
+.item-component {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* New Item Form */
+  .new-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .new-item input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .new-item button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .new-item button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Item List */
+  .item-list {
+    margin-top: 20px;
+  }
+  
+  .item-list h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Individual Item */
+  .item {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+    transition: box-shadow 0.3s;
+    cursor: pointer;
+  }
+  
+  .item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .item .item-info {
+    margin-top: 5px;
+  }
+  
+  .item .item-info p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Expanded Section */
+  .item div[style="display: block;"] {
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+    color: #777;
+    font-size: 14px;
+  }
+  
