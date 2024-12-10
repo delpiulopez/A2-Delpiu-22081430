@@ -26,4 +26,10 @@ db.items = require("./item.model.js")(sequelize, Sequelize);
 db.customers = require("./customer.model.js")(sequelize, Sequelize);
 db.orders = require("./order.model.js")(sequelize, Sequelize);
 
+db.orders.belongsTo(db.customers, { foreignKey: "customer_id" });
+db.customers.hasMany(db.orders, { foreignKey: "customer_id" });
+
+db.items.hasMany(db.orders, { foreignKey: "item_id" });
+db.orders.belongsTo(db.items, { foreignKey: "item_id" });
+
 module.exports = db;

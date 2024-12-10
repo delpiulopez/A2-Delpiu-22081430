@@ -349,3 +349,59 @@ body {
     font-size: 14px;
   }
   
+/* Order Components Styling */
+.order-component {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .new-order {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .new-order input,
+  .new-order select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .new-order button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .new-order button:hover {
+    background-color: #45a049;
+  }
+  
+  .orders-list {
+    margin-top: 20px;
+  }
+  
+  .order {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+  }
+  
+  .order p {
+    margin: 5px 0;
+    color: #555;
+  }
+  

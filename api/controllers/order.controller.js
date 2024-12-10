@@ -49,9 +49,6 @@ exports.create = async (req, res) => {
 // Retrieve all Orders
 exports.findAll = (req, res) => {
   Order.findAll({
-    where: {
-      customer_id: parseInt(req.params.customerId),
-    },
     include: [
       {
         model: Customer,
