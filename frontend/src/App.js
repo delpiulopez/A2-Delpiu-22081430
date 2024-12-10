@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';  // import useEffect
 import ContactList from './components/ContactList';
 import Stats from './components/Stats';
 import './App.css';
+import ItemComponent from './components/ItemComponent';
 
 function App() {
     const [contacts, setContacts] = useState([]);
@@ -18,6 +19,7 @@ function App() {
     return (
         <div className='page'>
             <h1>Contactor</h1>
+            <ItemComponent />
             <ContactList contacts={contacts} setContacts={setContacts} />
             <p>Click a contact to view associated phone numbers</p>
             <Stats />
