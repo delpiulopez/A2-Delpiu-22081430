@@ -113,7 +113,12 @@ function OrderComponent() {
               <strong>Order ID:</strong> {order.order_id}
             </p>
             <p>
-              <strong>Date:</strong> {order.order_date}
+              <strong>Date:</strong>{" "}
+              {new Date(order.order_date).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })}
             </p>
             <p>
               <strong>Customer:</strong> {order.customer_name}
