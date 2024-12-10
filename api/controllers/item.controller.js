@@ -39,26 +39,26 @@ exports.findAll = (req, res) => {
 };
 
 // Update item by ID
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   const id = req.params.itemId;
 
-  Item.update(req.body, { where: { item_id: id } })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "Item was updated successfully.",
-        });
-      } else {
-        res.status(404).send({
-          message: `Cannot update Item with id=${id}. Item not found or req.body is empty.`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: `Error updating Item with id=${id}.`,
+  try {
+    const [num] = await Item.update(req.body, { where: { item_id: id } });
+
+    if (num === 1) {
+      // Fetch and return the updated item
+      const updatedItem = await Item.findOne({ where: { item_id: id } });
+      res.send(updatedItem);
+    } else {
+      res.status(404).send({
+        message: `Cannot update Item with id=${id}. Item not found or req.body is empty.`,
       });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: `Error updating Item with id=${id}.`,
     });
+  }
 };
 
 // Delete item by ID

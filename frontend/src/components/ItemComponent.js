@@ -4,8 +4,21 @@ function ItemComponent() {
   const [items, setItems] = useState([]);
   const [item_name, setItemName] = useState("");
   const [item_price, setItemPrice] = useState("");
+  const [editItemId, setEditItemId] = useState(null); // Track the item being edited
+  const [editItemName, setEditItemName] = useState("");
+  const [editItemPrice, setEditItemPrice] = useState("");
 
-  // Function to create a new item
+  // Fetch items data
+  useEffect(() => {
+    fetch("http://localhost/api/items")
+      .then((response) => response.json())
+      .then((data) => setItems(data))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
+  // Create a new item
   async function createItem(e) {
     e.preventDefault();
 
@@ -30,17 +43,37 @@ function ItemComponent() {
     setItemPrice("");
   }
 
-  // Function to get items data
-  useEffect(() => {
-    fetch("http://localhost/api/items")
-      .then((response) => response.json())
-      .then((data) => setItems(data))
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+  // Edit an existing item
+  async function editItem(e) {
+    e.preventDefault();
 
-  // Function to delete an item
+    const response = await fetch(`http://localhost/api/items/${editItemId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        item_name: editItemName,
+        item_price: parseInt(editItemPrice),
+      }),
+    });
+
+    const updatedItem = await response.json();
+
+    // Update the items list with the edited item
+    setItems(
+      items.map((item) =>
+        item.item_id === updatedItem.item_id ? updatedItem : item
+      )
+    );
+
+    // Reset edit states
+    setEditItemId(null);
+    setEditItemName("");
+    setEditItemPrice("");
+  }
+
+  // Delete an item
   async function doDelete(item_id) {
     await fetch(`http://localhost/api/items/${item_id}`, {
       method: "DELETE",
@@ -50,7 +83,7 @@ function ItemComponent() {
     setItems(updatedItems);
   }
 
-  // Function to toggle item details
+  // Toggle item details
   function toggleExpanded(index) {
     setItems((prevItems) =>
       prevItems.map((item, i) => ({
@@ -115,10 +148,52 @@ function ItemComponent() {
                 >
                   Delete Item
                 </button>
+                <button
+                  className="button yellow"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setEditItemId(item.item_id);
+                    setEditItemName(item.item_name);
+                    setEditItemPrice(item.item_price);
+                  }}
+                >
+                  Edit Item
+                </button>
               </div>
             )}
           </div>
         ))}
+
+        {/* Edit Form */}
+        {editItemId && (
+          <form className="edit-item" onSubmit={editItem}>
+            <h3>Edit Item</h3>
+            <input
+              type="text"
+              placeholder="Item Name"
+              onChange={(e) => setEditItemName(e.target.value)}
+              value={editItemName}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Item Price"
+              onChange={(e) => setEditItemPrice(e.target.value)}
+              value={editItemPrice}
+              required
+            />
+            <button className="button green" type="submit">
+              Save Changes
+            </button>
+            <button
+              className="button gray"
+              type="button"
+              onClick={() => setEditItemId(null)}
+            >
+              Cancel
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
