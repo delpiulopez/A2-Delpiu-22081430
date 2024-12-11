@@ -6,132 +6,235 @@ Please include your shared repository link here:
 
 Delpiu's shared repository: https://github.com/delpiulopez/A2-Delpiu-22081430.git
 
+## Tasks and Documentation
 
-Make sure for **your case it is in Private**
-## Access Database
-1 **Plsql Cheat Sheet:**
-You can refer to the PostgreSQL cheat sheet [here](https://www.postgresqltutorial.com/postgresql-cheat-sheet/).
+### Task 1: USER INTERFACE CHANGES
 
-2 **Know the Container ID:**
-To find out the container ID, execute the following command:
-   ```bash
-   docker ps
-    9958a3a534c9   testsystem-nginx           "/docker-entrypoint.…"   6 minutes ago   Up 6 minutes   0.0.0.0:80->80/tcp   testsystem-nginx-1
-    53121618baa4   testsystem-frontend        "docker-entrypoint.s…"   6 minutes ago   Up 6 minutes   3000/tcp             testsystem-frontend-1
-    c89e46ac94b0   testsystem-api             "docker-entrypoint.s…"   6 minutes ago   Up 6 minutes   5000/tcp             testsystem-api-1
-    9f4aea7cf538   postgres:15.3-alpine3.18   "docker-entrypoint.s…"   6 minutes ago   Up 6 minutes   5432/tcp             testsystem-db-1
-   ```
-3. Running the application
+#### Change Button Label from Contact Component
 
-**docker compose command:**
-   ```bash
-   docker compose up --build
-   ```
+_Screenshot:_
+![UI Changes](screenshots/task1_1.png)
 
-4 **Access postgreSQL in the container:**
-Once you have the container ID, you can execute the container using the following command:
-You will see the example of running the PostgreSQL inside the container.
-   ```bash
-   docker exec -it testsystem-db-1 psql -U postgres
-   choiruzain@MacMarichoy TestSystem % docker exec -it testsystem-db-1 psql -U postgres                                       
-   psql (15.3)
-   Type "help" for help.
-   
-   postgres=# \dt
-             List of relations
-    Schema |   Name   | Type  |  Owner   
-   --------+----------+-------+----------
-    public | contacts | table | postgres
-    public | phones   | table | postgres
-   (2 rows)
-  
-    postgres=# select * from contacts;
-    id |  name  |         createdAt         |         updatedAt         
-   ----+--------+---------------------------+---------------------------
-     1 | Helmut | 2024-08-08 11:57:57.88+00 | 2024-08-08 11:57:57.88+00
-    (1 row)
-    postgres=# select * from phones;
-    id | phone_type |   number    | contactId |         createdAt          |         updatedAt          
-   ----+------------+-------------+-----------+----------------------------+----------------------------
-     1 | Work       | 081431      |         1 | 2024-08-08 11:59:04.386+00 | 2024-08-08 11:59:04.386+00
+#### Change Button Label in Phone Component
 
+_Screenshot:_
+![UI Changes](screenshots/task1_2.png)
 
-postgres=# select * from contacts;
-   ```
-Replace `container_ID` with the actual ID of the container you want to execute.
+#### Change the Placeholder Text "Name" with Input Type Text into a Drop-down Menu with 4 Categories
 
-## Executing API
+_Screenshot:_
+![UI Changes](screenshots/task1_3.png)
 
-### Contact API
+#### Change the Label "Name" to "Phone Type" 
 
+_Screenshot:_
+![UI Changes](screenshots/task1_4.png)
 
-1. Add contacts API  (POST)
+---
+
+### Task 2: API OPERATIONS
+
+#### Show Contact
 ```bash
-http post http://localhost/api/contacts name="Choiru"
-        
-choiruzain@MacMarichoy-7 TestSystem % http post http://localhost/api/contacts name="Choiru"
-HTTP/1.1 200 OK
-Access-Control-Allow-Origin: http://localhost:3000
-Connection: keep-alive
-Content-Length: 102
-Content-Type: application/json; charset=utf-8
-Date: Thu, 08 Aug 2024 21:01:53 GMT
-ETag: W/"66-FmPYAaIkyQoroDwP2JsAZjWTAxs"
-Server: nginx/1.25.1
-Vary: Origin
-X-Powered-By: Express
-
-{
-"createdAt": "2024-08-08T21:01:53.017Z",
-"id": 1,
-"name": "Choiru",
-"updatedAt": "2024-08-08T21:01:53.017Z"
-}
-
+curl -X GET http://localhost/api/contacts
 ```
-2 Get contacts API  (GET)
+_Screenshot:_
+![Show Contact Output](screenshots/show_contact.png)
 
+#### Add Contact
 ```bash
-http get http://localhost/api/contacts
-
-
-choiruzain@MacMarichoy-7 TestSystem % http get http://localhost/api/contacts
-HTTP/1.1 200 OK
-Access-Control-Allow-Origin: http://localhost:3000
-Connection: keep-alive
-Content-Length: 104
-Content-Type: application/json; charset=utf-8
-Date: Thu, 08 Aug 2024 21:04:58 GMT
-ETag: W/"68-V+4KuL2xahYt8YAkKG6rKdR7wHg"
-Server: nginx/1.25.1
-Vary: Origin
-X-Powered-By: Express
-
-[
-{
-"createdAt": "2024-08-08T21:01:53.017Z",
-"id": 1,
-"name": "Choiru",
-"updatedAt": "2024-08-08T21:01:53.017Z"
-}
-]
-
-
+curl -X POST http://localhost/api/contacts -H "Content-Type: application/json" -d "{\"name\": \"Test Contact\", \"address\": \"123 Test St\"}"
 ```
-3. Show/create the API commmand to delete the contacts (DELETE)
+_Screenshot:_
+![Add Contact Output](screenshots/add_contact.png)
 
+#### Delete Contact
 ```bash
-
-
-
-
-
+curl -X DELETE http://localhost/api/contacts/1
 ```
+_Screenshot:_
+![Delete Contact Output](screenshots/delete_contact.png)
 
-4. Show/create the API command to edit the contacts (PUT)
+#### Update Contact
+```bash
+curl -X PUT http://localhost/api/contacts/1 -H "Content-Type: application/json" -d "{\"name\": \"Updated Contact\", \"address\": \"456 Updated Ave\"}"
 ```
-http get http://localhost/api/contacts/1/phones
+_Screenshot:_
+![Update Contact Output](screenshots/update_contact.png)
 
+#### Show Phone
+```bash
+curl -X GET http://localhost/api/phones
 ```
+_Screenshot:_
+![Show Phone Output](screenshots/show_phone.png)
 
-### Phone API
+#### Add Phone
+```bash
+curl -X POST http://localhost/api/phones -H "Content-Type: application/json" -d "{\"number\": \"1234567890\", \"type\": \"mobile\", \"contact_id\": 1}"
+```
+_Screenshot:_
+![Add Phone Output](screenshots/add_phone.png)
+
+#### Delete Phone
+```bash
+curl -X DELETE http://localhost/api/phones/1
+```
+_Screenshot:_
+![Delete Phone Output](screenshots/delete_phone.png)
+
+#### Update Phone
+```bash
+curl -X PUT http://localhost/api/phones/1 -H "Content-Type: application/json" -d "{\"number\": \"0987654321\", \"type\": \"home\"}"
+```
+_Screenshot:_
+![Update Phone Output](screenshots/update_phone.png)
+
+---
+
+### Task 3: DATABASE MODELLING WITH SEQUELIZE AND TEST THE API COMMANDS WHEN THE DATABASE MODIFICATION DONE
+
+#### Table `contacts`
+Added columns and updated constraints to better support relations.
+
+_Screenshot:_
+![Contacts Table Schema](screenshots/contacts_table_schema.png)
+
+#### Table `phones`
+Modified schema to include foreign key linking phones to contacts.
+
+_Screenshot:_
+![Phones Table Schema](screenshots/phones_table_schema.png)
+
+#### Frontend Output
+_Screenshot:_
+![Frontend Output](screenshots/frontend_output.png)
+
+#### Test the 8 APIs After Modifications
+
+1. **Show Contact:**
+   ```bash
+   curl -X GET http://localhost/api/contacts
+   ```
+   _Screenshot:_
+   ![Show Contact API Test](screenshots/modified_show_contact.png)
+
+2. **Add Contact:**
+   ```bash
+   curl -X POST http://localhost/api/contacts -H "Content-Type: application/json" -d "{\"name\": \"Test Contact\", \"address\": \"123 Test St\"}"
+   ```
+   _Screenshot:_
+   ![Add Contact API Test](screenshots/modified_add_contact.png)
+
+3. **Update Contact:**
+   ```bash
+   curl -X PUT http://localhost/api/contacts/1 -H "Content-Type: application/json" -d "{\"name\": \"Updated Contact\", \"address\": \"456 Updated Ave\"}"
+   ```
+   _Screenshot:_
+   ![Update Contact API Test](screenshots/modified_update_contact.png)
+
+4. **Delete Contact:**
+   ```bash
+   curl -X DELETE http://localhost/api/contacts/1
+   ```
+   _Screenshot:_
+   ![Delete Contact API Test](screenshots/modified_delete_contact.png)
+
+5. **Show Phone:**
+   ```bash
+   curl -X GET http://localhost/api/phones
+   ```
+   _Screenshot:_
+   ![Show Phone API Test](screenshots/modified_show_phone.png)
+
+6. **Add Phone:**
+   ```bash
+   curl -X POST http://localhost/api/phones -H "Content-Type: application/json" -d "{\"number\": \"1234567890\", \"type\": \"mobile\", \"contact_id\": 1}"
+   ```
+   _Screenshot:_
+   ![Add Phone API Test](screenshots/modified_add_phone.png)
+
+7. **Update Phone:**
+   ```bash
+   curl -X PUT http://localhost/api/phones/1 -H "Content-Type: application/json" -d "{\"number\": \"0987654321\", \"type\": \"home\"}"
+   ```
+   _Screenshot:_
+   ![Update Phone API Test](screenshots/modified_update_phone.png)
+
+8. **Delete Phone:**
+   ```bash
+   curl -X DELETE http://localhost/api/phones/1
+   ```
+   _Screenshot:_
+   ![Delete Phone API Test](screenshots/modified_delete_phone.png)
+
+---
+
+### Task 4: EXPANDING THE EXISTING TABLES (E.G. COMPANY)
+
+#### Companies table
+
+_Screenshot:_
+![Companies Table Structure](screenshots/companies_table.png)
+
+#### Add Company
+```bash
+curl -X POST http://localhost/api/companies -H "Content-Type: application/json" -d "{\"company_name\": \"Ador\", \"company_address\": \"Incheon 2\", \"contact_id\": 37}"
+```
+_Screenshot:_
+![Add Company Output](screenshots/add_company.png)
+
+#### Show Company
+```bash
+curl http://localhost/api/companies/37
+```
+_Screenshot:_
+![Show Company Output](screenshots/show_company.png)
+
+#### Update Company
+```bash
+curl -X PUT http://localhost/api/companies/1/contacts/37 -H "Content-Type: application/json" -d "{\"company_name\": \"Nwjns Inc\", \"company_address\": \"Tamsur\"}"
+```
+_Screenshot:_
+![Update Company Output](screenshots/update_company.png)
+
+#### Delete Company
+```bash
+curl -X DELETE http://localhost/api/companies/1/contacts/37
+```
+_Screenshot:_
+![Delete Company Output](screenshots/delete_company.png)
+
+---
+
+### Task 5: FRONTEND
+
+#### Overview of New Files
+I created 3 new files – “NewCompany.js, Company.js, and CompanyList.js”. Each of the files has their own purposes, but collectively, the addition of the 3 new files provide a complete CRUD interface to manage companies tied to a specific contact.
+
+1. **NewCompany.js**: defines the NewCompany component which provides a form for users to input a new company name and company address and sends a request to create a new company associated with a contact.
+
+_Screenshot:_
+![New Company Files](screenshots/new_company.png)
+
+2. **CompanyList.js**: defines the CompanyList component that manages the list of companies associated with a contact. It displays companies in a table form integrating the Company component for each row and includes the NewCompany components to add new company entries.
+
+_Screenshot:_
+![New Company Files](screenshots/company_list.png)
+
+3. **Company.js**: defines the Company component, representing a single company in a table row. It has functionality to let users delete or edit the company entries they have made previously.
+
+_Screenshot:_
+![New Company Files](screenshots/company.png)
+
+#### Integration
+The new components were integrated into `Contact.js` to support CRUD operations for companies. A `useEffect` hook fetches company data dynamically and updates the `companies` state.
+
+_Screenshot:_
+![New Company Files](screenshots/task_5_features.png)
+
+#### Frontend Output
+_Screenshot:_
+![New Company Files](screenshots/task_5_frontend.png)
+
+---
